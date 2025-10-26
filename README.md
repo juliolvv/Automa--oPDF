@@ -1,68 +1,298 @@
-📚 PDFAutomation
-
-O PDFAutomation é um script simples em Python desenvolvido para mesclar automaticamente vários arquivos PDF em um único documento final. Ele percorre uma pasta contendo PDFs, organiza-os em ordem alfabética e cria um novo arquivo consolidado.
-
-🚀 Funcionalidades
-
-🔍 Lê automaticamente todos os arquivos PDF dentro da pasta Documents/
-
-🧩 Mescla os arquivos em uma única sequência
-
-📑 Gera um arquivo final nomeado como PDF Final.pdf
-
-⚙️ Ordena os arquivos em ordem alfabética antes da fusão
-
-🧠 Como funciona
-
-O script utiliza a biblioteca PyPDF2 para realizar a fusão dos arquivos.
-O processo básico é:
-
-Ler todos os arquivos da pasta Documents/
-
-Filtrar apenas os PDFs
-
-Adicionar cada PDF ao objeto PdfMerger
-
-Gerar o arquivo final na raiz do projeto
-
-📦 Estrutura do Projeto
-📂 PDFAutomation/
-├── 📂 Documents/
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="pdfautomation">PDFAutomation</h1>
+<p>O <strong>PDFAutomation</strong> é um script em
+<strong>Python</strong> desenvolvido para mesclar automaticamente vários
+arquivos PDF em um único documento final.<br />
+Ele percorre uma pasta contendo arquivos PDF, organiza-os em ordem
+alfabética e cria um novo arquivo consolidado.</p>
+<hr />
+<h2 id="funcionalidades">Funcionalidades</h2>
+<ul>
+<li>Lê automaticamente todos os arquivos PDF dentro da pasta
+<code>Documents/</code></li>
+<li>Mescla os arquivos em uma única sequência</li>
+<li>Gera um arquivo final nomeado como <code>PDF Final.pdf</code></li>
+<li>Ordena os arquivos em ordem alfabética antes da fusão</li>
+</ul>
+<hr />
+<h2 id="como-funciona">Como funciona</h2>
+<p>O script utiliza a biblioteca <strong>PyPDF2</strong> para realizar a
+fusão dos arquivos.<br />
+O processo básico é o seguinte:</p>
+<ol type="1">
+<li>Ler todos os arquivos da pasta <code>Documents/</code></li>
+<li>Filtrar apenas os PDFs</li>
+<li>Adicionar cada PDF ao objeto <code>PdfMerger</code></li>
+<li>Gerar o arquivo final na raiz do projeto</li>
+</ol>
+<hr />
+<h2 id="estrutura-do-projeto">Estrutura do Projeto</h2>
+<pre><code>PDFAutomation/
+│
+├── Documents/
 │   ├── arquivo1.pdf
 │   ├── arquivo2.pdf
 │   └── ...
+│
 ├── PDFAutomation.py
-└── PDF Final.pdf  ← (gerado automaticamente)
-
-🧰 Requisitos
-
-Python 3.x
-
-Biblioteca PyPDF2
-
-Instalação dos pacotes necessários:
-
-pip install PyPDF2
-
-▶️ Como usar
-
-Crie uma pasta chamada Documents no mesmo diretório do script.
-
-Adicione dentro dela todos os arquivos .pdf que deseja unir.
-
-Execute o script:
-
-python PDFAutomation.py
-
-
-Após a execução, o arquivo PDF Final.pdf será gerado automaticamente na raiz do projeto.
-
-⚠️ Observações
-
-Certifique-se de que os nomes dos arquivos PDF estejam em ordem alfabética se quiser manter a sequência correta na fusão.
-
-A pasta é sensível a maiúsculas/minúsculas no nome (Documents ≠ documents).
-
-🧑‍💻 Autor
-
-Júlio César
+└── PDF Final.pdf  (gerado automaticamente)</code></pre>
+<hr />
+<h2 id="requisitos">Requisitos</h2>
+<ul>
+<li>Python 3.x<br />
+</li>
+<li>Biblioteca PyPDF2</li>
+</ul>
+<p>Instale a dependência com o comando:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install PyPDF2</span></code></pre></div>
+<hr />
+<h2 id="como-usar">Como usar</h2>
+<ol type="1">
+<li><p>Crie uma pasta chamada <code>Documents</code> no mesmo diretório
+do script.<br />
+</p></li>
+<li><p>Adicione dentro dela todos os arquivos <code>.pdf</code> que
+deseja unir.<br />
+</p></li>
+<li><p>Execute o script:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> PDFAutomation.py</span></code></pre></div></li>
+<li><p>O arquivo <code>PDF Final.pdf</code> será gerado automaticamente
+na pasta principal.</p></li>
+</ol>
+<hr />
+<h2 id="observações">Observações</h2>
+<ul>
+<li>Certifique-se de que os nomes dos arquivos estejam em ordem
+alfabética se quiser controlar a sequência.<br />
+</li>
+<li>O nome da pasta deve ser exatamente <code>Documents</code>
+(respeitando maiúsculas e minúsculas).</li>
+</ul>
+<hr />
+<h2 id="autor">Autor</h2>
+<p><strong>Júlio César</strong><br />
+Projeto acadêmico e experimental em Python.</p>
+</body>
+</html>
